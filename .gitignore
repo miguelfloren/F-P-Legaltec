@@ -20,8 +20,6 @@ Thumbs.db
 dist/
 .wrangler/
 
-# Config local con secrets (rellenar manualmente, no commitear)
-js/config.js
 
 # Supabase temp files (generados por CLI)
 supabase/.temp/
