@@ -1,7 +1,7 @@
 const RESEND_API_KEY   = Deno.env.get('RESEND_API_KEY')      ?? '';
-const FROM_EMAIL       = Deno.env.get('RESEND_FROM_EMAIL')   ?? 'noreply@fplegaltec.es';
-const NOTIFY_EMAIL     = Deno.env.get('RESEND_NOTIFY_EMAIL') ?? 'miguelfloren@gmail.com';
-const ADMIN_URL        = Deno.env.get('ADMIN_DASHBOARD_URL') ?? 'https://fplegaltec.es/admin.html';
+const FROM_EMAIL       = Deno.env.get('RESEND_FROM_EMAIL')   ?? 'noreply@pflegaltec.com';
+const NOTIFY_EMAIL     = Deno.env.get('RESEND_NOTIFY_EMAIL') ?? 'info@pflegaltec.com';
+const ADMIN_URL        = Deno.env.get('ADMIN_DASHBOARD_URL') ?? 'https://pflegaltec.com/admin.html';
 
 interface LeadData {
   nombre: string;
@@ -45,13 +45,13 @@ export async function sendLeadNotification(lead: LeadData): Promise<void> {
           <p>Si necesita contactarnos urgentemente:</p>
           <ul>
             <li>Teléfono: <a href="tel:+34676594016">+34 676594016</a></li>
-            <li>Email: <a href="mailto:miguelfloren@gmail.com">miguelfloren@gmail.com</a></li>
+            <li>Email: <a href="mailto:info@pflegaltec.com">info@pflegaltec.com</a></li>
           </ul>
           <p>Horario: lunes a viernes, 9:00 – 21:00.</p>
           <p>Primera consulta siempre gratuita y sin compromiso.</p>
           <p>Atentamente,<br><strong>El equipo de F&P Legaltec</strong><br>Cuesta de San Francisco nº 5 Entlo</p>
           <hr style="border:none;border-top:1px solid #eee;margin:24px 0">
-          <p style="font-size:12px;color:#999">Sus datos son tratados conforme al RGPD. Puede ejercer sus derechos en <a href="mailto:miguelfloren@gmail.com">miguelfloren@gmail.com</a>. <a href="https://fplegaltec.es/privacidad.html">Política de privacidad</a>.</p>
+          <p style="font-size:12px;color:#999">Sus datos son tratados conforme al RGPD. Puede ejercer sus derechos en <a href="mailto:info@pflegaltec.com">info@pflegaltec.com</a>. <a href="https://pflegaltec.com/privacidad.html">Política de privacidad</a>.</p>
         </div>
       `,
     }),

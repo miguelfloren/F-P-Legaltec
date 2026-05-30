@@ -53,12 +53,21 @@ document.getElementById('formSubmit').addEventListener('click', async function()
   });
 
   var consent = document.getElementById('consentRgpd');
+  var consentErr = document.getElementById('consentError');
   if (!consent.checked) {
     invalid = true;
     var consentGroup = consent.closest('.form-group');
     consentGroup.style.color = '#c9504a';
+    if (!consentErr) {
+      consentErr = document.createElement('p');
+      consentErr.id = 'consentError';
+      consentErr.style.cssText = 'color:#c9504a;font-size:13px;margin-top:6px;';
+      consentErr.textContent = 'Debe aceptar la política de privacidad para enviar el formulario.';
+      consentGroup.appendChild(consentErr);
+    }
     consent.addEventListener('change', function() {
       consentGroup.style.color = '';
+      if (consentErr) consentErr.remove();
     }, { once: true });
   }
 

@@ -1,0 +1,7 @@
+RewriteEngine On
+
+# Canonical host: pflegaltec.com
+RewriteCond %{HTTP_HOST} ^www\.pflegaltec\.com$ [NC]
+RewriteRule ^ https://pflegaltec.com%{REQUEST_URI} [R=301,L]
+
+DirectoryIndex index.html

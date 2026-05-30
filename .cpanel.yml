@@ -1,0 +1,7 @@
+---
+deployment:
+  tasks:
+    - export DEPLOYPATH=/home2/hosting173992eu/public_html/pflegaltec.com/
+    - /bin/cp index.html $DEPLOYPATH
+    - /bin/rm -rf $DEPLOYPATH/assets
+    - /bin/cp -R assets $DEPLOYPATH
