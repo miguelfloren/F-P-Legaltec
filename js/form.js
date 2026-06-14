@@ -1,44 +1,8 @@
-// ── SMOOTH SCROLL ──────────────────────────────
-document.querySelectorAll('a[href^="#"]').forEach(function(a) {
-  a.addEventListener('click', function(e) {
-    var id = a.getAttribute('href');
-    if (id === '#') return;
-    var el = document.querySelector(id);
-    if (el) {
-      e.preventDefault();
-      var top = el.getBoundingClientRect().top + window.pageYOffset - 64;
-      window.scrollTo({ top: top, behavior: 'smooth' });
-      navMobile.classList.remove('open');
-    }
-  });
-});
-
-// ── NAV ON SCROLL ──────────────────────────────
-var nav = document.getElementById('nav');
-window.addEventListener('scroll', function() {
-  if (window.scrollY > 16) {
-    nav.style.background = 'rgba(20,25,36,0.97)';
-    nav.style.borderBottomColor = 'rgba(255,255,255,0.10)';
-  } else {
-    nav.style.background = 'rgba(20,25,36,0.94)';
-    nav.style.borderBottomColor = 'rgba(255,255,255,0.06)';
-  }
-});
-
-// ── HAMBURGER ─────────────────────────────────
-var hamburger = document.getElementById('hamburger');
-var navMobile = document.getElementById('navMobile');
-hamburger.addEventListener('click', function() {
-  navMobile.classList.toggle('open');
-});
-
 // ── FORM SUBMIT ───────────────────────────────
 document.getElementById('formSubmit').addEventListener('click', async function() {
-  // Honeypot: campo oculto rellenado = bot, ignorar silenciosamente
   if (document.getElementById('website').value) return;
 
   var invalid = false;
-
   ['nombre', 'email', 'area'].forEach(function(id) {
     var el = document.getElementById(id);
     if (!el.value.trim()) {
@@ -54,19 +18,19 @@ document.getElementById('formSubmit').addEventListener('click', async function()
 
   var consent = document.getElementById('consentRgpd');
   var consentErr = document.getElementById('consentError');
-  if (!consent.checked) {
+  if (consent && !consent.checked) {
     invalid = true;
     var consentGroup = consent.closest('.form-group');
-    consentGroup.style.color = '#c9504a';
+    if (consentGroup) consentGroup.style.color = '#c9504a';
     if (!consentErr) {
       consentErr = document.createElement('p');
       consentErr.id = 'consentError';
       consentErr.style.cssText = 'color:#c9504a;font-size:13px;margin-top:6px;';
       consentErr.textContent = 'Debe aceptar la política de privacidad para enviar el formulario.';
-      consentGroup.appendChild(consentErr);
+      if (consentGroup) consentGroup.appendChild(consentErr);
     }
     consent.addEventListener('change', function() {
-      consentGroup.style.color = '';
+      if (consentGroup) consentGroup.style.color = '';
       if (consentErr) consentErr.remove();
     }, { once: true });
   }
@@ -87,9 +51,9 @@ document.getElementById('formSubmit').addEventListener('click', async function()
       body: JSON.stringify({
         nombre:       document.getElementById('nombre').value.trim(),
         email:        document.getElementById('email').value.trim(),
-        telefono:     document.getElementById('telefono').value.trim(),
+        telefono:     document.getElementById('telefono') ? document.getElementById('telefono').value.trim() : '',
         area:         document.getElementById('area').value,
-        mensaje:      document.getElementById('mensaje').value.trim(),
+        mensaje:      document.getElementById('mensaje') ? document.getElementById('mensaje').value.trim() : '',
         consent_rgpd: true,
         honeypot:     document.getElementById('website').value,
       }),
@@ -116,16 +80,3 @@ document.getElementById('formSubmit').addEventListener('click', async function()
     errMsg.textContent = 'Error al enviar. Por favor, inténtelo de nuevo o llámenos al +34 676594016.';
   }
 });
-
-// ── REVEAL ON SCROLL ───────────────────────────
-if ('IntersectionObserver' in window) {
-  var obs = new IntersectionObserver(function(entries) {
-    entries.forEach(function(entry) {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-        obs.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.10 });
-  document.querySelectorAll('.reveal').forEach(function(el) { obs.observe(el); });
-}

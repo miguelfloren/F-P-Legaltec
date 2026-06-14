@@ -26,3 +26,6 @@ supabase/.temp/
 
 # Carpetas de trabajo / diseño previo al repo
 OFICIAL LEGALTEC PAGE/
+
+# Local dev router for php -S (do NOT deploy)
+_router.php
